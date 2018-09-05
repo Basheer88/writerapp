@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Writer App</title>
+		<link rel="icon" href="{{ url_for('static', filename='icon.png') }}">
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='IndexStyles.css') }}">
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div><h1>Welcome to Writer App
+					<figure class="owner">
+						<img src="{{ url_for('static', filename='writer.ico') }}">
+					</figure></h1>
+				</div>
+			</div>
+
+			{% block content %}
+			{% if user_num == 0 %}
+				<div class = "menu">
+					<div class="intro">
+						<a href="{{url_for('showLogin')}}">
+							<button class="btn">Login</button>
+						</a>
+						<p class="WriterInfo">Writer App is a place where you can write whatever you like and express yourself without any limitation</p>
+					</div>
+					<div class="postMenu">
+						<h2>Latest Posts</h2>
+						{% for post in posts %}
+							<div class="post-item">
+								<h3>{{post.title}}</h3>
+								<p>{{post.description}}</p>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+
+			{% else %}
+				<div class = "menu">
+					<div class="intro">
+						<a href="{{url_for('newPost', author_id = user_num )}}">
+							<button class="btn">Write Post</button>
+						</a>
+						<br>
+						<a href="{{url_for('disconnect')}}">
+							<button class="btn">Logout</button>
+						</a>
+						<p class="WriterInfo">Writer App is a place where you can write whatever you like and express yourself without any limitation</p>
+					</div>
+					<div class="postMenu">
+						<h2>Latest Posts</h2>
+						{% for post in posts %}
+							<div class="post-item">
+								{% if post.author_id == user_num %}
+									<h3>{{post.title}}</h3>
+									<p>{{post.description}}</p>
+									<a href='{{url_for('editPost', author_id = user_num, post_id=post.id ) }}'>Edit</a> | 
+									<a href='{{url_for('deletePost', author_id = user_num, post_id=post.id ) }}'>Delete</a>
+
+								{% else %}
+									<h3>{{post.title}}</h3>
+									<p>{{post.description}}</p>
+								{% endif %}
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			{% endif %}
+		{% endblock %}
+		</div>
+	</body>
+</html>

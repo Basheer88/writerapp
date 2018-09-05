@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Writer App</title>
+		<link rel="icon" href="{{ url_for('static', filename='icon.png') }}">
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='IndexStyles.css') }}">
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div>
+					<h1>{{ author.name }}
+					<figure class="owner">
+						<img src="{{ author.picture }}">
+					</figure></h1>
+				</div>
+			</div>
+
+			{% block content %}
+			<div class="form">
+				<form action="#" method = "post">
+					{% if operation == 'Add' %}
+						<label for="name">Title:</label>
+						<input type ="text" maxlength="50" name = "title"><br>
+						<label for="description">Description:</label><br>
+						<textarea class = "textarea" maxlength="1000" rows="10" name="description"></textarea><br>
+						<button type="submit" class="btn tool" id="submit" type="submit">Create</button>
+						<a href = '{{url_for('showIndex')}}'>
+							<button class="btn tool" type="button">Cancel</button>
+						</a>
+
+					{% elif operation == 'Edit' %}
+						<label for = "name">Title:</label>
+						<input type = "text" maxlength="250" name = "title" value="{{item.title}}"><br>
+						<label for = "description">Description:</label><br>
+						<textarea class = "textarea" maxlength="250" rows="3" name="description">{{item.description}}</textarea><br>
+						<button type="submit" class="btn tool" id="submit" type="submit">Save</button>
+						<a href = '{{url_for('showIndex')}}'>
+							<button class="btn tool" type="button">Cancel</button>
+						</a>
+
+					{% else %}
+						<h2> Are you sure you want to delete {{item.title}}? </h2>
+						<button type="submit" class="btn tool" id="submit" type="submit">Delete</button>
+						<a href = '{{url_for('showIndex')}}'>
+							<button class="btn tool" type="button">Cancel</button>
+						</a>
+					{% endif %}
+				</form>
+			</div>
+			{% endblock %}
+		</div>
+	</body>
+</html>

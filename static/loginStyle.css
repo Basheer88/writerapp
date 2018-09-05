@@ -1,0 +1,14 @@
+* {
+	font-family: "Times New Roman", Times, serif;
+}
+
+body {
+	background-color: #e6ffff;
+}
+
+.container {
+	display: flex;
+	height: 400px;
+	justify-content: center;
+	align-items: center;
+}
