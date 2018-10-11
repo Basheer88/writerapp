@@ -1,6 +1,6 @@
 # Writer App 
 -----------------------
-This is simple app used by all people who want a palce to write whatever they want without any restriction. This app programmed using python and flask framework.
+This is simple app used by all people who want a place to write whatever they want without any restriction. This app programmed using python and flask framework.
 
 ## Requirments
 python version 3 ( Can be download from [here](https://www.python.org/downloads/))
